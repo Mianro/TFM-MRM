@@ -6,9 +6,6 @@
  */
 
 
-// Copyright Jim Merkle, 2/17/2020
-// Module: w25q128.c
-
 #include "w25n01gv.h"
 #include "main.h" // STM32 HAL defines
 #include <stdio.h> // printf()
@@ -235,16 +232,7 @@ int W25_WriteNoCheck(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWri
 
 // lfs functions implementation
 
-/*
- * @brief littlefs read interface
- * @param [in] c lfs_config数据结构
- * @param [in] block 要读的块
- * @param [in] off 在当前块的偏移
- * @param [out] buffer 读取到的数据
- * @param [in] size 要读取的字节数
- * @return 0 成功 <0 错误
- * @note littlefs 一定不会存在跨越块存储的情况
- */
+
 int W25_readLittlefs(const struct lfs_config *c, lfs_block_t block, lfs_off_t off, void *buffer, lfs_size_t size) {
 
 	uint16_t page_numb = (block * 64) + (off/2048);
@@ -257,17 +245,6 @@ int W25_readLittlefs(const struct lfs_config *c, lfs_block_t block, lfs_off_t of
 }
 
 
-
-/*
- * @brief littlefs write interface
- * @param [in] c lfs_config数据结构
- * @param [in] block 要读的块
- * @param [in] off 在当前块的偏移
- * @param [out] buffer 读取到的数据
- * @param [in] size 要读取的字节数
- * @return 0 成功 <0 错误
- * @note littlefs 一定不会存在跨越块存储的情况
- */
 int W25_writeLittlefs(const struct lfs_config *c, lfs_block_t block, lfs_off_t off, const void *buffer, lfs_size_t size) {
 
 	uint16_t page_numb = (block * 64) + (off/2048);
@@ -281,12 +258,6 @@ int W25_writeLittlefs(const struct lfs_config *c, lfs_block_t block, lfs_off_t o
 
 
 
-/*
- * @brief littlefs 擦除一个块
- * @param [in] c lfs_config数据结构
- * @param [in] block 要擦出的块
- * @return 0 成功 <0 错误
- */
 int W25_eraseLittlefs(const struct lfs_config *c, lfs_block_t block) {
 
 	W25_SectorErase(block);

@@ -6,9 +6,6 @@
  */
 
 
-// Copyright Jim Merkle, 2/17/2020
-// Module: w25q128.c
-
 #include "w25n01gv.h"
 
 #include "spi.h"   // HAL header files, SPI and GPIO defines
@@ -240,16 +237,6 @@ int W25_WriteNoCheck(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWri
 
 // lfs functions implementation
 
-/*
- * @brief littlefs read interface
- * @param [in] c lfs_configæ•°æ�®ç»“æž„
- * @param [in] block è¦�è¯»çš„å�—
- * @param [in] off åœ¨å½“å‰�å�—çš„å��ç§»
- * @param [out] buffer è¯»å�–åˆ°çš„æ•°æ�®
- * @param [in] size è¦�è¯»å�–çš„å­—èŠ‚æ•°
- * @return 0 æˆ�åŠŸ <0 é”™è¯¯
- * @note littlefs ä¸€å®šä¸�ä¼šå­˜åœ¨è·¨è¶Šå�—å­˜å‚¨çš„æƒ…å†µ
- */
 
 int W25_readLittlefs(const struct lfs_config *c, lfs_block_t block, lfs_off_t off, void *buffer, lfs_size_t size) {
 
@@ -263,18 +250,6 @@ int W25_readLittlefs(const struct lfs_config *c, lfs_block_t block, lfs_off_t of
 }
 
 
-
-/*
- * @brief littlefs write interface
- * @param [in] c lfs_configæ•°æ�®ç»“æž„
- * @param [in] block è¦�è¯»çš„å�—
- * @param [in] off åœ¨å½“å‰�å�—çš„å��ç§»
- * @param [out] buffer è¯»å�–åˆ°çš„æ•°æ�®
- * @param [in] size è¦�è¯»å�–çš„å­—èŠ‚æ•°
- * @return 0 æˆ�åŠŸ <0 é”™è¯¯
- * @note littlefs ä¸€å®šä¸�ä¼šå­˜åœ¨è·¨è¶Šå�—å­˜å‚¨çš„æƒ…å†µ
- */
-
 int W25_writeLittlefs(const struct lfs_config *c, lfs_block_t block, lfs_off_t off, const void *buffer, lfs_size_t size) {
 
 	uint16_t page_numb = (block * 64) + (off/2048);
@@ -286,14 +261,6 @@ int W25_writeLittlefs(const struct lfs_config *c, lfs_block_t block, lfs_off_t o
 	return LFS_ERR_OK;
 }
 
-
-
-/*
- * @brief littlefs æ“¦é™¤ä¸€ä¸ªå�—
- * @param [in] c lfs_configæ•°æ�®ç»“æž„
- * @param [in] block è¦�æ“¦å‡ºçš„å�—
- * @return 0 æˆ�åŠŸ <0 é”™è¯¯
- */
 
 int W25_eraseLittlefs(const struct lfs_config *c, lfs_block_t block) {
 
